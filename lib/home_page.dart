@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/info_page.dart';
+import 'package:hello_world/insert_page.dart';
 // import 'package:hello_world/home_controller.dart';
 
 // class HomePage extends StatelessWidget {
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const InfoPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const InsertPage()));
                         }, 
                         child: const Text('Entrar')
                       )
