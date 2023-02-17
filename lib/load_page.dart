@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:hello_world/home_page.dart';
 
 class LoadPage extends StatefulWidget {
   final String json;
@@ -13,6 +14,17 @@ class LoadPage extends StatefulWidget {
 
 class _LoadPageState extends State<LoadPage> {
     
+  @override
+  void initState() {
+    super.initState();
+
+    Future(() {
+      if(true) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+    });
+  }
+  
   final FocusNode _focusNode = FocusNode();
   final String json;
   

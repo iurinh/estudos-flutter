@@ -1,8 +1,8 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:hello_world/auth.dart';
 import 'package:hello_world/load_page.dart';
 
 class InsertPage extends StatefulWidget {
@@ -16,6 +16,13 @@ class _InsertPageState extends State<InsertPage> {
   
   final QuillController _controller = QuillController.basic();
   final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    Auth().isAuth(context);
+  }
 
   @override
   Widget build(BuildContext context) {
