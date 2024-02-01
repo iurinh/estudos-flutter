@@ -13,7 +13,6 @@ class InsertPage extends StatefulWidget {
 }
 
 class _InsertPageState extends State<InsertPage> {
-  
   final QuillController _controller = QuillController.basic();
   final FocusNode _focusNode = FocusNode();
 
@@ -30,9 +29,11 @@ class _InsertPageState extends State<InsertPage> {
       appBar: AppBar(
         title: Row(
           children: [
-            IconButton(onPressed: () {
-              Navigator.pop(context);
-            }, icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios_new_rounded)),
             const Expanded(child: SelectableText("Insert"))
           ],
         ),
@@ -40,29 +41,34 @@ class _InsertPageState extends State<InsertPage> {
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: Column(          
-          mainAxisAlignment: MainAxisAlignment.center,          
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            QuillToolbar.basic(controller: _controller),
+            QuillToolbar.simple(
+                configurations:
+                    QuillSimpleToolbarConfigurations(controller: _controller)),
             Expanded(
-              child: QuillEditor(
-                readOnly: false,
-                controller: _controller, 
-                autoFocus: true,
-                expands: true, 
-                focusNode: _focusNode, 
-                padding: EdgeInsets.zero, 
-                scrollController: ScrollController(), 
-                scrollable: true,
+              child: QuillEditor.basic(
+                configurations: QuillEditorConfigurations(
+                  readOnly: false,
+                  controller: _controller,
+                  autoFocus: true,
+                  expands: true,
+                  padding: EdgeInsets.zero,
+                  scrollable: true,
+                ),
+                focusNode: _focusNode,
+                scrollController: ScrollController(),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(15),
               child: FloatingActionButton(
-                onPressed: () {   
-                  final json = jsonEncode(_controller.document.toDelta().toJson());
-                  print(json);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoadPage(json)));
+                onPressed: () {
+                  final json =
+                      jsonEncode(_controller.document.toDelta().toJson());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoadPage(json)));
                 },
                 child: const Icon(Icons.save),
               ),
@@ -72,5 +78,4 @@ class _InsertPageState extends State<InsertPage> {
       ),
     );
   }
-
 }
