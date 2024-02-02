@@ -1,39 +1,34 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:hello_world/home_page.dart';
 
 class LoadPage extends StatefulWidget {
-  final String json;
-  const LoadPage(this.json, {super.key});
+  const LoadPage({super.key});
 
   @override
-  State<LoadPage> createState() => _LoadPageState(json);
+  State<LoadPage> createState() => _LoadPageState();
 }
 
 class _LoadPageState extends State<LoadPage> {
   @override
   void initState() {
     super.initState();
-
-    Future(() {
-      if (true) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
-      }
-    });
   }
 
   final FocusNode _focusNode = FocusNode();
-  final String json;
-
-  _LoadPageState(this.json);
 
   @override
   Widget build(BuildContext context) {
-    final QuillController _controller = QuillController(
-      document: Document.fromJson(jsonDecode(json)),
+    const json = [
+      {"insert": "teste ests \n"},
+      {
+        "insert": "tset",
+        "attributes": {"bold": true}
+      },
+      {"insert": " \nsdfsgfdsg\n"}
+    ];
+
+    final QuillController controller = QuillController(
+      document: Document.fromJson(json),
       selection: const TextSelection.collapsed(offset: 0),
     );
 
@@ -49,7 +44,7 @@ class _LoadPageState extends State<LoadPage> {
               child: QuillEditor.basic(
                 configurations: QuillEditorConfigurations(
                   readOnly: true,
-                  controller: _controller,
+                  controller: controller,
                   showCursor: false,
                   autoFocus: false,
                   expands: true,

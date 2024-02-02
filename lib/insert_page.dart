@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:hello_world/auth.dart';
-import 'package:hello_world/load_page.dart';
 
 class InsertPage extends StatefulWidget {
   const InsertPage({super.key});
@@ -27,15 +26,8 @@ class _InsertPageState extends State<InsertPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-            const Expanded(child: SelectableText("Insert"))
-          ],
+        title: const Row(
+          children: [Expanded(child: SelectableText("Insert"))],
         ),
       ),
       body: SizedBox(
@@ -67,8 +59,7 @@ class _InsertPageState extends State<InsertPage> {
                 onPressed: () {
                   final json =
                       jsonEncode(_controller.document.toDelta().toJson());
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoadPage(json)));
+                  print(json);
                 },
                 child: const Icon(Icons.save),
               ),
